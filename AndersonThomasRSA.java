@@ -82,8 +82,13 @@ public class AndersonThomasRSA
 	// For example, 5^20 is too big to be held by a Java primitive integer
 	//
 	public int modExp (int a, int b, int n) {
-		// TO BE FINISHED
-		return 0;
+		BigInteger aBigInt = BigInteger.valueOf ((long) a);
+                        BigInteger bBigInt = BigInteger.valueOf ((long) b);
+                        BigInteger nBigInt = BigInteger.valueOf ((long) n);
+
+                        BigInteger resBigInt = aBigInt.modPow (bBigInt, nBigInt);
+                        int res = resBigInt.intValue ();
+		return res;
 	}
 
 	public int encrypt (int message, int inE, int inN) {
