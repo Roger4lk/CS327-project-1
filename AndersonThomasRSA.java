@@ -14,7 +14,15 @@ public class AndersonThomasRSA
 		// Must implement Euclid's algorithm
 		// NO brute-forcing; violation will lead to zero points
 		// NO recursion; violation will lead to zero points
-		return 0;
+		int d = Integer.MAX_VALUE;
+		
+		while(d != 0) {
+			d = inZ % inE;
+			inZ = inE;
+			inE = d;
+		
+		}
+		return inZ;
 	}
 
 	public void testGcd () {
@@ -57,8 +65,15 @@ public class AndersonThomasRSA
 	}
 
 	public int[] keygen (int inP, int inQ, int inE) {
-		// TO BE FINISHED
+		int n = inP * inQ;
+		int z = (inP - 1) * (inQ - 1);
+		
+		int priv = xgcd(inE, z);
+		//what to do with private key?
+		
 		int[] key = new int[1];
+		key[0] = n;
+		key[1] = inE;
 		return key;
 	}
 
