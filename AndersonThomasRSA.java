@@ -65,15 +65,15 @@ public class AndersonThomasRSA
 	}
 
 	public int[] keygen (int inP, int inQ, int inE) {
+		
 		int n = inP * inQ;
-		int z = (inP - 1) * (inQ - 1);
+		int z = (inP - 1) * (inQ - 1);	
+		int d = xgcd(inE, z);
 		
-		int priv = xgcd(inE, z);
-		//what to do with private key?
-		
-		int[] key = new int[1];
-		key[0] = n;
-		key[1] = inE;
+		int[] key = new int[3];
+		key[0] = inE;
+		key[1] = n;
+		key[2] = d;
 		return key;
 	}
 
