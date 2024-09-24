@@ -126,7 +126,6 @@ public class AndersonThomasRSA
 	//
 	public int modExp (int a, int b, int n) {
 		String d = Integer.toBinaryString(b);
-		System.out.println(d + " " + b);
         int k = d.length();
         int res = 1;
 		int w = a;
