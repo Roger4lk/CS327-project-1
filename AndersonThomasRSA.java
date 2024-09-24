@@ -1,4 +1,3 @@
-import java.math.BigInteger;
 
 /**
  * @author Xunhua Wang. All rights reserved.
@@ -126,12 +125,17 @@ public class AndersonThomasRSA
 	// For example, 5^20 is too big to be held by a Java primitive integer
 	//
 	public int modExp (int a, int b, int n) {
-		BigInteger aBigInt = BigInteger.valueOf ((long) a);
-                        BigInteger bBigInt = BigInteger.valueOf ((long) b);
-                        BigInteger nBigInt = BigInteger.valueOf ((long) n);
-
-                        BigInteger resBigInt = aBigInt.modPow (bBigInt, nBigInt);
-                        int res = resBigInt.intValue ();
+		String d = Integer.toBinaryString(b);
+		System.out.println(d + " " + b);
+        int k = d.length();
+        int res = 1;
+		int w = a;
+		for (int i = k-1; i >= 0; i--) {
+			if (d.charAt(i)=='1') {
+				res = (w * res) % n;
+			}
+			w = (w * w) % n;
+		}
 		return res;
 	}
 
