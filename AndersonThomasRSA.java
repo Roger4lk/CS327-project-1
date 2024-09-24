@@ -1,5 +1,4 @@
-import java.util.Random;
-import jdk.jshell.spi.ExecutionControl;
+import java.math.BigInteger;
 
 /**
  * @author Xunhua Wang. All rights reserved.
@@ -45,11 +44,41 @@ public class AndersonThomasRSA
 	//	inverse of inE mod inZ
 	//
 	public int xgcd (int inE, int inZ) {
-		// TO BE FINISHED
-		// Must implement the extended Euclidean algorithm
-		// NO brute-forcing; violation will lead to zero points
-		// NO recursion; violation will lead to zero points
-		return 0;
+		if (gcd(inE, inZ) != 1) {
+			return -1;
+		}
+
+		int[] d = new int[3];
+		d[0] = inZ;
+		d[1] = inE;
+		int[] s = new int[3];
+		int q;
+		s[0] = 1;
+		s[1] = 0;
+		int[] t = new int[3];
+		t[0] = 0;
+		t[1] = 1;
+		
+		while(d[1] != 0) {
+			q = d[0] / d[1];
+			d[2] = d[0] % d[1];
+			d[0] = d[1];
+			d[1] = d[2];
+			
+			t[2] = t[0] - (t[1] * q);
+			t[0] = t[1];
+			t[1] = t[2];
+
+			s[2] = s[0] - (s[1] * q);
+			s[0] = s[1];
+			s[1] = s[2];
+			
+
+		}
+		if (t[0] < 0) {
+			return t[0] + inZ;
+		}
+		return t[0];
 	}
 
 	public void testXgcd () {
@@ -58,10 +87,10 @@ public class AndersonThomasRSA
 		int result3 = xgcd (149, 288);
 		int result4 = xgcd (2, 4);
 
-		System.out.println ("29^-1 mod 288 = 0x" + Integer.toString(result1, 16));
-		System.out.println ("30^-1 mod 288 = 0x" + Integer.toString(result2, 16));
-		System.out.println ("149^-1 mod 288 = 0x" + Integer.toString(result3, 16));
-		System.out.println ("2^-1 mod 4 = 0x" + Integer.toString(result4, 16));
+		System.out.println ("29^-1 mod 288 = 0x" + Integer.toString(result1, 16) + " " + result1);
+		System.out.println ("30^-1 mod 288 = 0x" + Integer.toString(result2, 16) + " " + result2);
+		System.out.println ("149^-1 mod 288 = 0x" + Integer.toString(result3, 16) + " " + result3);
+		System.out.println ("2^-1 mod 4 = 0x" + Integer.toString(result4, 16) + " " + result4);
 	}
 
 	public int[] keygen (int inP, int inQ, int inE) {
