@@ -136,13 +136,13 @@ public class AndersonThomasRSA
 	}
 
 	public int encrypt (int message, int inE, int inN) {
-		// TO BE FINISHED
-		return 0;
+		int cypherText = modExp(message, inE, inN);
+		return cypherText;
 	}
 
 	public int decrypt (int ciphertext, int inD, int inN) {
-		// TO BE FINISHED
-		return 0;
+		int plaintext = modExp(ciphertext, inD, inN);
+		return plaintext;
 	}
 
 	public void testRSA () {
